@@ -116,29 +116,28 @@ def file_exist(pf):
         return True
     return False
 
-if args.pf_hypothesis==None and args.pf_references==None:
-    exit(0)
-if args.pf_hypothesis==None:
-    raise Exception("Missing references files...")
-if args.pf_references==None:
-    raise Exception("Missing hypothesis files...")
+if args.pf_hypothesis!=None or args.pf_references!=None:
+    if args.pf_hypothesis==None:
+        raise Exception("Missing references files...")
+    if args.pf_references==None:
+        raise Exception("Missing hypothesis files...")
 
-n = None
-data = []
-for pf in args.pf_hypothesis+args.pf_references:
-    if not file_exist(pf):
-        raise Exception("File Not Found: %s"%(pf))
-    f = codecs.open(pf, encoding="utf-8")
-    data.append(f.readlines())
-    if n==None:
-        n = len(data[-1])
-    elif n != len(data[-1]):
-        raise Exception("Not parrallel: %s %d-%d"%(pf, n, len(data[-1])))
-    f.close()
+    n = None
+    data = []
+    for pf in args.pf_hypothesis+args.pf_references:
+        if not file_exist(pf):
+            raise Exception("File Not Found: %s"%(pf))
+        f = codecs.open(pf, encoding="utf-8")
+        data.append(f.readlines())
+        if n==None:
+            n = len(data[-1])
+        elif n != len(data[-1]):
+            raise Exception("Not parrallel: %s %d-%d"%(pf, n, len(data[-1])))
+        f.close()
 
-hyp_data = data[0]
-ref_data = list(map(list, zip(*data[1:])))
+    hyp_data = data[0]
+    ref_data = list(map(list, zip(*data[1:])))
 
-bleu, addition = corpus_bleu(hyp_data, ref_data)
+    bleu, addition = corpus_bleu(hyp_data, ref_data)
 
-print("BLEU = %.2f, %.1f/%.1f/%.1f/%.1f (BP=%.3f, ratio=%.3f, hyp_len=%d, ref_len=%d)"%(bleu[0]*100, bleu[1]*100, bleu[2]*100, bleu[3]*100, bleu[4]*100, addition[0], addition[1], addition[2], addition[3]))
+    print("BLEU = %.2f, %.1f/%.1f/%.1f/%.1f (BP=%.3f, ratio=%.3f, hyp_len=%d, ref_len=%d)"%(bleu[0]*100, bleu[1]*100, bleu[2]*100, bleu[3]*100, bleu[4]*100, addition[0], addition[1], addition[2], addition[3]))

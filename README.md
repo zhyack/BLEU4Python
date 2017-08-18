@@ -21,6 +21,7 @@ Here is what you are looking for. A python script to work the same as the moses'
     * `import bleu`
     * `bleu_count(hypothesis, references, max_n=4)` does the most important count work for BLEU. It returns `clip_count (correct), count (total), len_hyp, len_ref(sum of closest_length)`
     * `corpus_bleu(hypothesis, references, max_n=4)` does the complete BLEU calculation. It returns `BLEU([final bleu, p_1, p_2, ..., p_max_n]), additional message([BP, ratio, hyp_len, ref_len]) `
+    * `hypothesis` should be a 1-dimension string list, and `references` should be a 2-dimension string list.
 
 ## Something Wrong?
 * Make sure your files are UTF-8 formatted.
