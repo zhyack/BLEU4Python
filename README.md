@@ -15,7 +15,7 @@ Here is what you are looking for. A python code to work the same way as the mose
 
 ## How to Use
 * If there are files you want to test:
-    * `python bleu.py [-h] [-hyp PATH_OF_HYPOTHESIS][-ref PATH_OF_REFERENCES [REFERENCES_1, REFERENCES_2, REFERENCES_3 ...]]`
+    * `python multi_bleu.py [-h] [-hyp PATH_OF_HYPOTHESIS][-ref PATH_OF_REFERENCES [REFERENCES_1, REFERENCES_2, REFERENCES_3 ...]]`
     * There should be only **ONE** hypothesis file and **MORE THAN ZERO** reference file(s).
     * This will print to screen the BLEU scores like `BLEU = 48.39, 76.9/56.0/42.1/32.0 (BP=0.986, ratio=0.986, hyp_len=19588, ref_len=19865)`. Just same as moses.
 * If you want to use in python code:
