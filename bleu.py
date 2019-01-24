@@ -78,7 +78,10 @@ def corpus_bleu(hypothesis, references, max_n=4):
         else:
             bleu_scores.append(0)
     if total_len_hyp < total_len_ref:
-        brevity_penalty = math.exp(1 - total_len_ref/total_len_hyp)
+        if total_len_hyp==0:
+            brevity_penalty = 0.0
+        else:
+            brevity_penalty = math.exp(1 - total_len_ref/total_len_hyp)
     def my_log(x):
         if x == 0:
             return -9999999999.0
@@ -186,7 +189,10 @@ def incremental_sent_bleu(hypothesis, references, max_n=4):
             else:
                 bleu_scores.append(0)
         if total_len_hyp[i] < total_len_ref[i]:
-            brevity_penalty = math.exp(1 - total_len_ref[i]/total_len_hyp[i])
+            if total_len_hyp[i]==0:
+                brevity_penalty = 0.0
+            else:
+                brevity_penalty = math.exp(1 - total_len_ref[i]/total_len_hyp[i])
         def my_log(x):
             if x == 0:
                 return -9999999999.0
@@ -222,7 +228,10 @@ def incremental_test_corpus_bleu(hypothesis, references, max_n=4):
         else:
             bleu_scores.append(0)
     if total_len_hyp < total_len_ref:
-        brevity_penalty = math.exp(1 - total_len_ref/total_len_hyp)
+        if total_len_hyp==0:
+            brevity_penalty = 0.0
+        else:
+            brevity_penalty = math.exp(1 - total_len_ref/total_len_hyp)
     def my_log(x):
         if x == 0:
             return -9999999999.0
